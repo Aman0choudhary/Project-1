@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Forcing a server refresh -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .form-container {
+            transition: all 0.3s ease-in-out;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn {
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .flashes {
+            list-style: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        .flashes .error { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .flashes .success { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .flashes .warning { background-color: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-900">Secret Image Encoder</h1>
+            <p class="text-lg text-gray-600 mt-2">Hide your messages in plain sight.</p>
+        </header>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <main class="grid md:grid-cols-2 gap-8">
+            <!-- Encode Section -->
+            <div class="bg-white p-8 rounded-xl shadow-md form-container">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Encode a Message</h2>
+                <form action="/encode" method="POST">
+                    <div class="mb-4">
+                        <label for="prompt" class="block text-sm font-medium text-gray-700 mb-2">1. Image Prompt</label>
+                        <input type="text" id="prompt" name="prompt" placeholder="e.g., a wolf in a snowy forest" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="secret_message" class="block text-sm font-medium text-gray-700 mb-2">2. Secret Message</label>
+                        <textarea id="secret_message" name="secret_message" rows="4" placeholder="Your secret text goes here..." required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 btn">
+                        Generate & Encode Image
+                    </button>
+                    <p class="text-xs text-center text-gray-500 mt-3">Your download will start automatically.</p>
+                </form>
+            </div>
+
+            <!-- Decode Section -->
+            <div class="bg-white p-8 rounded-xl shadow-md form-container">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Decode an Image</h2>
+                <form action="/decode" method="POST" enctype="multipart/form-data">
+                    <div class="mb-6">
+                        <label for="file" class="block text-sm font-medium text-gray-700 mb-2">Upload an encoded image</label>
+                        <input type="file" id="file" name="file" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    </div>
+                    <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 btn">
+                        Reveal Secret Message
+                    </button>
+                </form>
+
+                {% if decoded_message %}
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Revealed Message:</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <p class="text-gray-800 break-words">{{ decoded_message }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
+
