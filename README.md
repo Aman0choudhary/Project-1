@@ -6,7 +6,7 @@ A simple Flask-based web application that allows users to hide (encode) and reve
 
 Built with Python, Flask, and Pillow.
 
-🚀 Features
+##🚀 Features
 
 Encode secret text inside an image
 
@@ -20,7 +20,7 @@ Secure environment variable handling with .env
 
 Lightweight and beginner-friendly project
 
-🛠️ Tech Stack
+##🛠️ Tech Stack
 
 Backend: Flask 2.2.2
 
@@ -34,7 +34,8 @@ HTTP Requests: requests
 
 Server Utilities: werkzeug
 
-📂 Project Structure
+## 📂 Project Structure
+```
 project/
 │── app.py
 │── debug_test.py
@@ -46,7 +47,7 @@ project/
 │── uploads/
 │   ├── original_image.png
 │   └── encoded_image.png
-
+```
 ⚙️ Installation & Setup
 1️⃣ Clone the repository
 git clone https://github.com/your-username/Project-1.git
@@ -73,20 +74,20 @@ Open browser:
 
 http://127.0.0.1:5000
 
-🧪 Example Use Case
+##🧪 Example Use Case
 
-Upload an image
-Enter a secret message
-Download encoded image
-Upload encoded image to decode the hidden message
+-Upload an image
+-Enter a secret message
+-Download encoded image
+-Upload encoded image to decode the hidden message
 
-📌 Future Improvements
+##📌 Future Improvements
 
-User authentication
-Drag-and-drop upload UI
-Download history
-Deployment on Render / Railway / Vercel
-Better UI with Tailwind or Bootstrap
+-User authentication
+-Drag-and-drop upload UI
+-Download history
+-Deployment on Render / Railway / Vercel
+-Better UI with Tailwind or Bootstrap
 
 🤝 Contributing
 
@@ -97,7 +98,8 @@ Feel free to fork this repo and improve it.
 
 If you like this project, give it a ⭐ on GitHub — it motivates a lot 😄
 
-👨‍💻 Author
+##👨‍💻 Author
 
 Aman Tetarwal
+
 Student | Python | Flask | Learning Full-Stack Development
