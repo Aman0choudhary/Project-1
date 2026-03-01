@@ -6,6 +6,10 @@ A simple Flask-based web application that allows users to hide (encode) and reve
 
 Built with Python, Flask, and Pillow.
 
+## 🎬 Demo Video
+
+[![Demo Video](https://img.youtube.com/vi/cUwRh9UnKDI/0.jpg)](https://youtu.be/cUwRh9UnKDI)
+
 ##🚀 Features
 
 Encode secret text inside an image
@@ -50,7 +54,7 @@ project/
 ```
 ⚙️ Installation & Setup
 1️⃣ Clone the repository
-git clone https://github.com/your-username/Project-1.git
+git clone https://github.com/Aman0choudhary/Project-1.git
 cd Project-1
 
 2️⃣ Create virtual environment (recommended)
